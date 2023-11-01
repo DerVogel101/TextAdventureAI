@@ -8,10 +8,10 @@ def get_column_length(loc: str) -> str | None:
 
     if os.name == "nt":
         match loc:
-            case "de_DE" | "de_AT" | "de_CH" | "de_LU":
+            case loc.startswith("de"):
                 mode_con_out = subprocess.check_output("mode con|findstr Spalten", shell=True)
                 terminal_column_length = mode_con_out.split()[1].decode("utf-8")
-            case "en_US" | "en_GB" | "en_CA" | "en_AU":
+            case loc.startswith("en"):
                 mode_con_out = subprocess.check_output("mode con|findstr Columns", shell=True)
                 terminal_column_length = mode_con_out.split()[1].decode("utf-8")
             case _:
@@ -28,10 +28,10 @@ def get_line_length(loc: str) -> str | None:
 
     if os.name == "nt":
         match loc:
-            case "de_DE" | "de_AT" | "de_CH" | "de_LU":
+            case loc.startswith("de"):
                 mode_con_out = subprocess.check_output("mode con|findstr Zeilen", shell=True)
                 terminal_line_length = mode_con_out.split()[1].decode("utf-8")
-            case "en_US" | "en_GB" | "en_CA" | "en_AU":
+            case loc.startswith("en"):
                 mode_con_out = subprocess.check_output("mode con|findstr Lines", shell=True)
                 terminal_line_length = mode_con_out.split()[1].decode("utf-8")
             case _:
